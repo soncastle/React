@@ -4,18 +4,30 @@ import com.example.React.domain.User;
 import com.example.React.dto.UserDto;
 import com.example.React.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
-    private UserRepository Repo;
+    private UserRepository userRepo;
+    public UserService(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
 
-    public String register(UserDto dto){
+
+
+    public void register(UserDto dto){
         User user = new User();
         user.setUserId(dto.getUserId());
         user.setPassword(dto.getPassword());
-        Repo.save(user);
-    return "";
+        userRepo.save(user);
     };
 
+    public List<UserDto> getAllUsers() {
+        return userRepo.findAll().stream()
+                .map(user -> new UserDto(user.getUserId(), user.getPassword()))
+                .collect(Collectors.toList());
+
+    }
 }

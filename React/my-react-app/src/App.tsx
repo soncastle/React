@@ -5,6 +5,7 @@ import Order from './Order';
 import { All } from './All'; // All 타입을 import
 import Get from './Get';
 import axios from 'axios';
+import RegisterList from './registerList';
 // { orderNumber, id, product, price }: props 객체에서 해당 속성들을 직접 추출하여 각각의 변수로 사용할 수 있게 해주는 구조 분해 할당 구문입니다.
 // {} 없이 사용하면 props.orderNumber, props.id처럼 매번 props를 통해 접근해야 합니다.
 const Purchase: All = {
@@ -25,10 +26,10 @@ function App() {
     password: ''
   });
 
-  const handleSumit = async (e: React.FormEvent) => {
+  const handleSumbit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/http://localhost:8080/register', register);
+      const response = await axios.post('http://localhost:8080/register', register);
       console.log('응답데이터:', response.data);
     } catch (err){
       console.error('에러발생:', err);
@@ -38,7 +39,7 @@ function App() {
 
   return (
     <div>
-        <form onSubmit={handleSumit}>
+        <form onSubmit={handleSumbit}>
       <div>
         <h2>회원가입</h2>
         <table>
@@ -71,6 +72,7 @@ function App() {
       <hr/>
       <div>회원 리스트</div>
       <Get/>
+      <RegisterList/>
     </div>
   );
 }
