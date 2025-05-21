@@ -5,7 +5,7 @@ function Get(){
     const [data, setData] = useState<string>('')
     
 useEffect(() => {
-    axios.get('/api/data')
+    axios.get('http://localhost:8080/api/data')
       .then(res => setData(res.data))
       .catch(err => console.log(err));
 }, []);

@@ -25,9 +25,19 @@ public class UserService {
     };
 
     public List<UserDto> getAllUsers() {
-        return userRepo.findAll().stream()
-                .map(user -> new UserDto(user.getUserId(), user.getPassword()))
-                .collect(Collectors.toList());
+//        return userRepo.findAll().stream()
+//                .map(user -> new UserDto(
+//                        user.getId(),
+//                        user.getUserId(),
+//                        user.getPassword()))
+//                .collect(Collectors.toList());
 
+        return userRepo.findAll().stream()
+                .map(user -> UserDto.builder()
+                        .id(user.getId())
+                        .userId(user.getUserId())
+                        .password(user.getPassword())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

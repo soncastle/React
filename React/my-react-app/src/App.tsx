@@ -5,7 +5,10 @@ import Order from './Order';
 import { All } from './All'; // All 타입을 import
 import Get from './Get';
 import axios from 'axios';
-import RegisterList from './registerList';
+import RegisterList from './RegisterList';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import Home from './Components/Home';
+import PageOne from './Components/PageOne';
 // { orderNumber, id, product, price }: props 객체에서 해당 속성들을 직접 추출하여 각각의 변수로 사용할 수 있게 해주는 구조 분해 할당 구문입니다.
 // {} 없이 사용하면 props.orderNumber, props.id처럼 매번 props를 통해 접근해야 합니다.
 const Purchase: All = {
@@ -39,6 +42,19 @@ function App() {
 
   return (
     <div>
+      <div>
+        <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/page-one" element={<PageOne/>} />
+        </Routes> 
+        <hr/>
+<Link to="/">gg</Link>
+<hr/>
+        </BrowserRouter>
+
+
+      </div>
         <form onSubmit={handleSumbit}>
       <div>
         <h2>회원가입</h2>
