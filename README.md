@@ -8,6 +8,7 @@
 ### React
 - #### Typescript 적용
 - #### 간단 회원가입 및 회원 리스트 구현
+- #### Routes : 페이지 변경 구현
 - #### proxy활용 : 초기 개발시 효율적인 CORS 해소
 
 ### Spring
