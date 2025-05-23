@@ -3,6 +3,7 @@ package com.example.React.service;
 import com.example.React.domain.User;
 import com.example.React.dto.UserDto;
 import com.example.React.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,16 +12,23 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private UserRepository userRepo;
-    public UserService(UserRepository userRepo) {
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserService(UserRepository userRepo, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepo = userRepo;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
 
     public void register(UserDto dto){
         User user = new User();
+        Boolean userName = userRepo.existsByUserName(dto.getUserId());
+        if(userName){
+          return ;
+        };
         user.setUserId(dto.getUserId());
-        user.setPassword(dto.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
+        user.setRole("ROLE_USER");
         userRepo.save(user);
     };
 
