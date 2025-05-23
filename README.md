@@ -12,4 +12,5 @@
 
 ### Spring
 - #### api 적용 : Rest API를 활용한 데이터 반환
+- #### DB 연결 : MariaDB
 - #### Security 적용중 : @CrossOrigin적용, 비밀번호 암호화, role 적용
