@@ -5,9 +5,13 @@ type User = {
     id: number,
     userId: string,
     password: string
-}
+};
 
-function RegisterList(){
+type Props = {
+  refresh: boolean;
+};
+
+function RegisterList({refresh} : Props){
     const [members, setMembers] = useState<User[]>([])
     
   useEffect(() => {
@@ -18,7 +22,7 @@ function RegisterList(){
       .catch((err) => {
         console.error('회원 불러오기 실패:', err);
       });
-  }, []);
+  }, [refresh]);
 
 
   return (

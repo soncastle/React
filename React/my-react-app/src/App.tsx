@@ -5,7 +5,7 @@ import Order from './Order';
 import { All } from './All'; // All 타입을 import
 import Get from './Get';
 import axios from 'axios';
-import RegisterList from './RegisterList';
+import RegisterList from './register/RegisterList';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Home from './Components/Home';
 import PageOne from './Components/PageOne';
@@ -29,11 +29,14 @@ function App() {
     password: ''
   });
 
+  const [refresh, setRefresh] = useState<boolean>(false); //false니까 boolean으로 자동추론됨!
+
   const handleSumbit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // 새로고침 방지!! 리액트는 SPA(Single Page Appalication)!!
     try {
       const response = await axios.post('http://localhost:8080/register', register);
       console.log('응답데이터:', response.data);
+      setRefresh(prev => !prev);
     } catch (err){
       console.error('에러발생:', err);
     }
@@ -47,7 +50,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/page-one" element={<PageOne/>} />
-        </Routes> 
+        </Routes>
         <hr/>
 <Link to="/">gg</Link>
 <hr/>
@@ -88,7 +91,7 @@ function App() {
       <hr/>
       <div>회원 리스트</div>
       <Get/>
-      <RegisterList/>
+      <RegisterList refresh={refresh}/>
     </div>
   );
 }
