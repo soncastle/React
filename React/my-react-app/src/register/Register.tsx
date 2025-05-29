@@ -12,10 +12,10 @@ function Register({onSuccess} : {onSuccess : () => void}) {
         userId : '',
         password : ''
     });
+const [reftesh, setRefresh] = useState<boolean>(false);
 
 const registerSubmit = async (e : React.FormEvent) => {
 e.preventDefault();
-const [reftesh, setRefresh] = useState<boolean>(false);
 
 try {
     const response = await axios.post('http://localhost:8080/register', register);

@@ -14,12 +14,13 @@ import java.util.List;
 public class RestMainController {
 
     private UserService service;
+
     public RestMainController(UserService service) {
         this.service = service;
     }
 
     @GetMapping("/api/data")
-    public String test(){
+    public String test() {
         return "Hello React!aefawefef";
     }
 
@@ -29,13 +30,22 @@ public class RestMainController {
         System.out.println(dto.getPassword());
         service.register(dto);
         return ResponseEntity.ok("회원가입 성공");
-    };
+    }
+
+    ;
 
     @GetMapping("/registerList")
     public List<UserDto> registerList() {
-               List<UserDto> users  = service.getAllUsers();
-        users.forEach(user->
+        List<UserDto> users = service.getAllUsers();
+        users.forEach(user ->
                 System.out.println(user.getUserId()));
-      return users;
+        return users;
     };
+
+
+    @GetMapping("/register")
+    public String testGet() {
+        return "GET 요청 성공";
+    };
+
 }
