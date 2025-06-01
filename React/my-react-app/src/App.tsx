@@ -17,6 +17,9 @@ function App () {
   return (
     <div>
       <RegisterPage/>
+      <BrowserRouter>
+        <Link to={"./realRegister/RegisterPage"}> RegisterPage</Link>
+      </BrowserRouter>
     </div>
   );
 }
